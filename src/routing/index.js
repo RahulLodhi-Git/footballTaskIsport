@@ -8,7 +8,7 @@ function MainRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/match-info" element={<MatchInfo />} />
+        <Route path="/match/:matchId" element={<MatchInfo />} />
       </Routes>
     </BrowserRouter>
   );

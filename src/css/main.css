@@ -430,7 +430,8 @@ tbody {
     font-weight: 400;
     margin: 0 10px;
 }
-.home{
+.home,
+.match-Info-wrap{
     padding-bottom: 100px;
 }
 .home .date.--active {
