@@ -1,0 +1,1 @@
+export const getFixturesUrl='http://cms.bettorlogic.com/api/BetBuilder/GetFixtures?sports=1'
