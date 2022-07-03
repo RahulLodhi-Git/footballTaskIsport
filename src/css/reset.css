@@ -6,14 +6,14 @@
   }
   
   /* Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
+  /* *::-webkit-scrollbar {
     width: 4px;
     height: 4px;
   }
   
   *::-webkit-scrollbar-thumb {
     border-radius: 4px;
-  }
+  } */
   
   #root{
     display: flex;

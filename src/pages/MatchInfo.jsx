@@ -16,6 +16,7 @@ function MatchInfo() {
     const navigate = useNavigate()
     const param = useParams()
 
+    /** Return GetSelectionLists take endpoint(url) as string*/
     const getSelectionList = (endPoint) => {
         axios
             .get(endPoint)
@@ -23,8 +24,7 @@ function MatchInfo() {
                 setSelectionList(response.data)
             })
             .catch(function (error) {
-                console.log(error);
-                return { loading: false, response: error };
+                alert('something went wrong')
             })
             .then(() => {
                 setLoading(false);
@@ -32,6 +32,7 @@ function MatchInfo() {
 
     }
 
+    /** Return getMarketList takes endpoint(url) as string*/
     const getMarketList = (endPoint) => {
         axios
             .get(endPoint)
@@ -39,14 +40,14 @@ function MatchInfo() {
                 setMarketList(response.data)
             })
             .catch(function (error) {
-                console.log(error);
-                return { loading: false, response: error };
+                alert('something went wrong')
             })
             .then(() => {
                 setLoading(false);
             });
     }
 
+    /** Return getBetList takes matchId,marketId, legs(selection ) as parameters*/
     const getBet = (matchid, marketid, legs) => {
         setLoading(true)
         let endPoint = `http://cms.bettorlogic.com/api/BetBuilder/GetBetBuilderBets?sports=1&matchId=${matchid}&marketId=${marketid}&legs=${legs}&language=en`
@@ -56,8 +57,7 @@ function MatchInfo() {
                 setBetData(response.data)
             })
             .catch(function (error) {
-                console.log(error);
-                return { loading: false, response: error };
+                alert('something went wrong')
             })
             .then(() => {
                 setLoading(false);

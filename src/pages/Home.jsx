@@ -7,9 +7,7 @@ import Loading from "../components/Loading";
 import { getFixturesUrl } from "../HelperFunction/ApiUrl";
 
 export default function Home() {
-  const [matchList, setMatchList] = useState(
-    JSON.parse(localStorage.getItem("matchList"))
-  );
+  const [matchList, setMatchList] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [date, setDate] = useState(moment().format("l"));
   const [dateArray, setDateArray] = useState([]);
@@ -26,12 +24,10 @@ export default function Home() {
     axios
       .get(getFixturesUrl)
       .then(function (response) {
-        // setMatchList(response.data)
         filterByParameters(date, "date", response.data);
       })
       .catch(function (error) {
-        console.log(error);
-        return { loading: false, response: error };
+        alert('something went wrong')
       })
       .then(() => {
         setLoading(false);
@@ -65,12 +61,10 @@ export default function Home() {
       let temp1 = filteredList.filter((item) => item.LeagueName === litem);
       finalFilterList.push(temp1);
     });
-    localStorage.setItem("matchList", JSON.stringify(finalFilterList));
     setMatchList(finalFilterList);
-    // console.log('finalFilterList', finalFilterList)
   };
 
-  console.log("matchList", dateArray);
+
 
   return (
     <>
@@ -88,7 +82,7 @@ export default function Home() {
                         setDate(dItem);
                         setLoading(true);
                       }}
-                    > 
+                    >
                       <p>{moment(dItem).format("llll").split(",")[0]}</p>
                       <p>{moment(dItem).format("lll").split(",")[0]}</p>
                     </div>
@@ -114,9 +108,9 @@ export default function Home() {
                         {item.map((mitem, id) => {
                           return (
                             <li key={mitem.Team2Id}>
-                              <Link 
-                              onClick={()=>{localStorage.setItem('matchInfo',JSON.stringify(mitem))}}
-                              to={`/match/${mitem.MatchId}`}
+                              <Link
+                                onClick={() => { localStorage.setItem('matchInfo', JSON.stringify(mitem)) }}
+                                to={`/match/${mitem.MatchId}`}
                               >
                                 {mitem.Team1Name}{" "}
                                 <span> {mitem.MatchTime} </span>
@@ -129,9 +123,16 @@ export default function Home() {
                     </div>
                   );
                 }
+
               })}
+
             </div>
           </div>
+          {matchList?.length == 0 &&
+            <div className="not-data">
+              <h5>No Data Avaiable at  {date}</h5>
+            </div>
+          }
         </div>
       </div>
     </>
